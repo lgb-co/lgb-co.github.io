@@ -3,6 +3,15 @@
 
 <head>
   <meta charset="UTF-8" />
+  <script>
+    window.__errs = [];
+    window.addEventListener('error', function (e) {
+      window.__errs.push('ERR: ' + e.message + ' @ ' + String(e.filename || '').split('/').pop() + ':' + e.lineno + ':' + e.colno);
+    });
+    window.addEventListener('unhandledrejection', function (e) {
+      window.__errs.push('REJ: ' + String((e.reason && (e.reason.stack || e.reason.message)) || e.reason));
+    });
+  </script>
   <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
   <link rel="preload" as="image" href="/textures/paper-texture.webp" type="image/webp" fetchpriority="high" crossorigin="anonymous">
   <link rel="icon" type="image/png" href="/favico.png" />
